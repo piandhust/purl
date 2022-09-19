@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@700;900&display=swap');
+
+body {
+  font-family: 'Lato';
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.timer {
+  font-size: 44px;
+  font-weight: 900;
+}
+
+.main-content {
+  height: 100vh;
+}
+
+.redirect-card {
+  background: linear-gradient(to right, #0575e6, #021b79);
+  border-radius: 1rem;
+}
