@@ -1,14 +1,12 @@
 import { TIME_OUT, DELAY_TIME, TIME_OUT_SKIP } from './constants.js';
-import { getRndInteger } from './utils.js';
 
-const redirectLinks = [
-  'https://google.com',
-  'https://facebook.com',
-  'https://stackoverflow.com',
-];
+var queryString = window.location.search;
+var urlParams = new URLSearchParams(queryString);
+var redirectUrl = urlParams.get('redirect');
 
-const selectedRedirectLink =
-  redirectLinks[getRndInteger(0, redirectLinks.length)];
+if(redirectUrl === undefined || redirectUrl === '' || redirectUrl === null){
+  window.location.href = 'https://piandhust.github.io/purl/convert.html';
+}
 
 // main
 const txtMinuteOut = document.querySelector('.minute-text');
@@ -20,7 +18,7 @@ const loadingSpinner = document.querySelector('.loading-spinner');
 let timeOut = TIME_OUT;
 
 btnRedirect.addEventListener('click', () => {
-  window.location.href = selectedRedirectLink;
+  window.location.href = redirectUrl;
 });
 
 window.onload = (event) => {
@@ -53,7 +51,7 @@ window.onload = (event) => {
       timeOut -= 1;
     } else {
       clearInterval(countDownRedirect);
-      window.location.href = selectedRedirectLink;
+      window.location.href = redirectUrl;
     }
   }, 1000);
 };
