@@ -3,11 +3,12 @@ import { TIME_OUT, DELAY_TIME, TIME_OUT_SKIP } from './constants.js';
 var queryString = window.location.search;
 var urlParams = new URLSearchParams(queryString);
 var redirectUrlEncode = urlParams.get('redirect');
-var redirectUrl = atob(redirectUrlEncode);
 
 if(redirectUrl === undefined || redirectUrl === '' || redirectUrl === null){
   window.location.href = 'https://piandhust.github.io/purl/convert.html';
 }
+
+var redirectUrl = atob(redirectUrlEncode);
 
 // main
 const txtMinuteOut = document.querySelector('.minute-text');
