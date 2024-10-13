@@ -2,7 +2,8 @@ import { TIME_OUT, DELAY_TIME, TIME_OUT_SKIP } from './constants.js';
 
 var queryString = window.location.search;
 var urlParams = new URLSearchParams(queryString);
-var redirectUrl = urlParams.get('redirect');
+var redirectUrlEncode = urlParams.get('redirect');
+var redirectUrl = atob(redirectUrlEncode);
 
 if(redirectUrl === undefined || redirectUrl === '' || redirectUrl === null){
   window.location.href = 'https://piandhust.github.io/purl/convert.html';

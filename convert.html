@@ -43,8 +43,9 @@
         function convert () {
             var url = document.getElementById("input_text");
             url = url.value;
-            
-            var targetUrl = "https://piandhust.github.io/purl?redirect=" + url;
+            urlEncode = btoa(url);
+
+            var targetUrl = "https://piandhust.github.io/purl?redirect=" + urlEncode;
             document.getElementById("output_text").value = targetUrl;
         }
       
