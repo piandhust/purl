@@ -4,7 +4,7 @@ var queryString = window.location.search;
 var urlParams = new URLSearchParams(queryString);
 var redirectUrlEncode = urlParams.get('redirect');
 
-if(redirectUrl === undefined || redirectUrl === '' || redirectUrl === null){
+if(redirectUrlEncode === undefined || redirectUrlEncode === '' || redirectUrlEncode === null){
   window.location.href = 'https://piandhust.github.io/purl/convert.html';
 }
 
