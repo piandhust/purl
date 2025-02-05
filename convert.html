@@ -1,72 +1,141 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>Dán URL bạn muốn chuyển đổi</title>
-  <style>
-  /*     #sidebarrightnbt{
-        display: none;  
-      }
-      
-      #mainblogsec{
-        width:150%;
-      }
-      #comments{display:none;}
-      footer{display:none;}
-      .home-link{display:none;}
-      #nav-searchnbt{display:none;} */
-      input[type=text] {
-          width: 80%;
-          padding: 12px 20px;
-          margin: 8px 0;
-          box-sizing: border-box;
-      }
-      .button {
-          width: 15%;
-          background-color: #4CAF50; /* Green */
-          border: none;
-          color: white;
-          padding: 15px 32px;
-          text-align: center;
-          text-decoration: none;
-          display: inline-block;
-          font-size: 16px;
-      }
-      label {
-          color: #B4886B;
-          font-weight: bold;
-          float: left;
-      }
-      label:after { content: ": " }
-    </style>
+  <meta charset="UTF-8">
+  <!-- displays site properly based on user's device -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <meta name="description" content="URL Shortening API Landing Page built by Karishma Garg for a Frontend Mentor Challenge">
+  <meta name="theme-color" content="#000000">
+  <link rel="stylesheet" href="./css/convert.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <title>Convert</title>
 </head>
 <body>
-    <script>
-        function convert () {
-            var url = document.getElementById("input_text");
-            url = url.value;
-            urlEncode = btoa(url);
 
-            var targetUrl = "https://piandhust.github.io/purl?redirect=" + urlEncode;
-            document.getElementById("output_text").value = targetUrl;
-        }
-      
-        function copyURL() {
-          var copyText = document.getElementById("output_text");
-          copyText.select();
-          copyText.setSelectionRange(0, 99999)
-          document.execCommand("copy");
-          alert("Copied the text: " + copyText.value);
-        }
-      </script>
-      <div style="font-family: Courier New; margin: 0px auto; width: 80%;">
-        <label>URL muốn chuyển đổi </label><br />
-        <input id="input_text" type="text" />
-        <button class="button" onclick="convert()">Convert</button>
-        <br />
-        <br />
-        <br />
-        <label>URL sau khi chuyển đổi:</label><br />
-        <input id="output_text" readonly="readonly" type="text" />
-        <button class="button" onclick="copyURL()">Copy</button>
-      </div>  
+  <!-- Header -->
+  <header class="grid-container">
+
+    <!-- Header text -->
+    <div class="header-text col-6">
+      <h2>
+        Create convert link
+      </h2>
+      <p class="header-desc">
+        View purl project in https://github.com/piandhust/purl
+      </p>
+      <a href="https://github.com/piandhust/purl" class="main-btns">Watch Now</a>
+    </div>
+
+  </header>
+
+  <!-- Main -->
+  <main>
+    
+     <div class="stats-bg">
+
+      <!-- Shorten Link input -->
+      <div class="grid-container form-result">
+
+        <!-- Form Container -->
+        <div class="form-container col-12">
+          <form class="col-12" name="url_form" id="form">
+            <input type="url" name="url" id="url-input" placeholder="Shorten a link here..." class="">
+            <div id="error"></div>
+            <button class="main-btns" id="submit-url" type="button" onclick="getShortLink()">Shorten It!</button>
+          </form>
+        </div>
+
+      </div>
+
+      <!-- Result Container -->
+      <div class="result grid-container"></div>
+
+    </div>
+
+  </main>
+  
+  <!-- Attribution -->
+  <div class="attribution" role="doc-credits">
+    Created by 
+    <a href="https://www.tailieubkhn.com/" target="_blank">
+        tailieubkhn
+    </a>
+  </div>
+
+  <!-- Script -->
+  <script>
+
+// Variables
+const urlInput = document.getElementById("url-input");
+const form = document.forms.url_form;
+const submitBtn = document.getElementById("submit-url");
+const result = document.querySelector(".result");
+const errorBox = document.getElementById("error");
+
+async function getShortLink() {
+    let link = urlInput.value;
+
+    if (!link) {
+        showError("Please add a link", false);
+        return;
+    }
+
+    showError("", true);
+
+    submitBtn.innerHTML = "Loading...";
+    let urlEncode = btoa(link);
+    let targetUrl = "https://piandhust.github.io/purl?redirect=" + urlEncode;
+  
+    submitBtn.innerHTML = 'Shorten it!' 
+    
+    let resConvert = document.getElementById("resultConvert");
+    if(resConvert){
+        resConvert.remove();
+    }
+
+    let appendCard = `<div class = "result-card col-12" id="resultConvert">
+                <div class="short-link">
+                  <a href="${targetUrl}" target="_blank">${targetUrl}</a>
+                  <button class="main-btns copy-btn">Copy</button>
+                </div>
+            </div>`;
+
+    result.insertAdjacentHTML(
+      "afterbegin",
+      appendCard
+    );
+  
+}
+
+  
+function showError(content, toggleRemove) {
+  if (!toggleRemove) {
+    urlInput.classList.add("error-outline");
+    errorBox.innerHTML = content;
+    return;
+  }
+  
+  urlInput.classList.remove("error-outline");
+  errorBox.innerHTML = "";
+}
+
+document.addEventListener('click', function (event) {
+    if (!event.target.classList.contains('copy-btn')) return;
+
+    let short_link = event.target.parentNode.querySelector('.short-link > a');
+ 
+    navigator.clipboard.writeText(short_link.href);
+
+    event.target.classList.add('copied');
+    event.target.textContent = 'Copied!';
+    
+    setTimeout(() => {
+        event.target.classList.remove('copied')
+        event.target.textContent = 'Copy'
+    }, 2500)
+
+})
+  </script>
+  
 </body>
 </html>
