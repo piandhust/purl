@@ -39,7 +39,7 @@
           <form class="col-12" name="url_form" id="form">
             <input type="url" name="url" id="url-input" placeholder="Shorten a link here..." class="">
             <div id="error"></div>
-            <button class="main-btns" id="submit-url" type="button" onclick="getShortLink()">Shorten It!</button>
+            <button class="main-btns" id="submit-url" type="button" onclick="getShortLink()">Convert It!</button>
           </form>
         </div>
 
@@ -84,7 +84,7 @@ async function getShortLink() {
     let urlEncode = btoa(link);
     let targetUrl = "https://piandhust.github.io/purl?redirect=" + urlEncode;
   
-    submitBtn.innerHTML = 'Shorten it!' 
+    submitBtn.innerHTML = 'Convert it!' 
     
     let resConvert = document.getElementById("resultConvert");
     if(resConvert){
