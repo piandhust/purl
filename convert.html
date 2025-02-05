@@ -31,8 +31,6 @@
   <!-- Main -->
   <main>
     
-     <div class="stats-bg">
-
       <!-- Shorten Link input -->
       <div class="grid-container form-result">
 
@@ -48,14 +46,14 @@
       </div>
 
       <!-- Result Container -->
-      <div class="result grid-container"></div>
+      <div class="result grid-container col-12" ></div>
 
     </div>
 
   </main>
   
   <!-- Attribution -->
-  <div class="attribution" role="doc-credits">
+  <div class="attribution" role="doc-credits" style="margin-top: 20px;">
     Created by 
     <a href="https://www.tailieubkhn.com/" target="_blank">
         tailieubkhn
@@ -94,7 +92,7 @@ async function getShortLink() {
     }
 
     let appendCard = `<div class = "result-card col-12" id="resultConvert">
-                <div class="short-link">
+                <div class="short-link" style="background-color: rgba(164, 142, 172, 0.15); padding: 20px;">
                   <a href="${targetUrl}" target="_blank">${targetUrl}</a>
                   <button class="main-btns copy-btn">Copy</button>
                 </div>
